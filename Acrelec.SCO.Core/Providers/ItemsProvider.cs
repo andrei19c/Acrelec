@@ -2,8 +2,10 @@
 using Acrelec.SCO.DataStructures;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Acrelec.SCO.Core.Providers
@@ -16,6 +18,8 @@ namespace Acrelec.SCO.Core.Providers
         private List<POSItem> _posItems;
 
         public List<POSItem> AllPOSItems => _posItems;
+
+        public List<POSItem> AvailablePOSItems => _posItems.Where(x=>x.IsAvailable).ToList();
 
         /// <summary>
         /// constructor
@@ -32,6 +36,8 @@ namespace Acrelec.SCO.Core.Providers
         public void LoadItemsFromPOS()
         {
             //todo - implement the code to load items from Data\ContentItems.json file
+            string text = File.ReadAllText("Data\\ContentItems.json");
+            _posItems = JsonSerializer.Deserialize<List<POSItem>>(text);
         }
 
         //todo - implement missing methods of interface
