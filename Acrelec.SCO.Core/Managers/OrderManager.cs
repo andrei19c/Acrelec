@@ -1,4 +1,6 @@
 ﻿using Acrelec.SCO.Core.Interfaces;
+using Acrelec.SCO.Core.Model.RestExchangedMessages;
+using Acrelec.SCO.Core.Services;
 using Acrelec.SCO.DataStructures;
 using System;
 using System.Collections.Generic;
@@ -10,19 +12,29 @@ namespace Acrelec.SCO.Core.Managers
 {
     public class OrderManager : IOrderManager
     {
-        private IItemsProvider _itemsProvider { get; set; }
+        private readonly IScoHttpClient _scoHttpClient;
 
         /// <summary>
         /// constructor
         /// </summary>
-        public OrderManager(IItemsProvider itemsProvider)
+        public OrderManager(IScoHttpClient scoHttpClient)
         {
-            _itemsProvider = itemsProvider;
+            _scoHttpClient = scoHttpClient;
         }
 
-        public Task<string> InjectOrderAsync(Order orderToInject)
+        public async Task<string> InjectOrderAsync(Order orderToInject)
         {
-            throw new NotImplementedException();
+            InjectOrderRequest request = new InjectOrderRequest
+            {
+                Order = orderToInject,
+                Customer = new Customer
+                {
+                    Address = "Home",
+                    Firstname = "John"
+                }
+            };
+            var result = await _scoHttpClient.AddOrder(request);
+            return result.OrderNumber;
         }
 
         //todo - implement interface knowing that it has to call the REST API described in readme.txt file 

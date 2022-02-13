@@ -36,6 +36,7 @@ namespace Acrelec.SCO.Core.Providers
         public void LoadItemsFromPOS()
         {
             //todo - implement the code to load items from Data\ContentItems.json file
+            //TO DO - add a repository
             string text = File.ReadAllText("Data\\ContentItems.json");
             _posItems = JsonSerializer.Deserialize<List<POSItem>>(text);
         }

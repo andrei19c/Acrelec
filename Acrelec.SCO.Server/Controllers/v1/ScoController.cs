@@ -22,7 +22,7 @@ namespace Acrelec.SCO.Server.Controllers.v1
         [Route("api-sco/v1/availability")]
         public IActionResult Get()
         {
-            return Ok(true);
+            return Ok();
         }
 
         [HttpPost]
@@ -32,7 +32,10 @@ namespace Acrelec.SCO.Server.Controllers.v1
         {
             var validationResult = _orderValidation.ValidateRequest(injectOrderRequest);
             if (validationResult?.Count == 0)
-                return Ok(10);
+                return Ok(new InjectOrderResponseDto
+                {
+                    OrderNumber = "10"
+                });
 
             return BadRequest(validationResult);
         }

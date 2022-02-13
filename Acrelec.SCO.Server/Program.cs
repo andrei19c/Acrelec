@@ -21,6 +21,7 @@ namespace Acrelec.SCO.Server
               .ConfigureWebHostDefaults(webBuilder =>
               {
                   webBuilder.UseStartup<Startup>();
+                  webBuilder.UseUrls("http://localhost:4500");
               });
     }
 }
