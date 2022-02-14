@@ -1,21 +1,15 @@
-﻿using Acrelec.SCO.Core.Helpers;
-using Acrelec.SCO.Core.Interfaces;
-using Acrelec.SCO.Core.Managers;
-using Acrelec.SCO.Core.Providers;
-using Acrelec.SCO.DataStructures;
-using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Acrelec.SCO.Core.Services;
+using Acrelec.SCO.Core.Helpers;
+using Acrelec.SCO.Core.Interfaces;
+using Acrelec.SCO.DataStructures;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
-using System.Linq;
 
 namespace Acrelec.SCO.Core
 {
-    
+
     public class Program
     {
         private static ILogService _logService { get; set; }
@@ -40,7 +34,8 @@ namespace Acrelec.SCO.Core
             ListAllItems();
 
             //todo - check if server is available for order injection
-            if (!await _scoHttpClient.IsAvailable())
+            var apiAvailable = await _scoHttpClient.IsAvailable();
+            if (!apiAvailable.CanInjectOrders)
             {
                 _logService.Print("Server not available");
                 Environment.Exit(0);

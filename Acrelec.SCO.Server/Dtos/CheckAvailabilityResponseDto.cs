@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Acrelec.SCO.Server.Model
+namespace Acrelec.SCO.Server.Dtos
 {
-    public class InjectOrderResponseDto
+    public class CheckAvailabilityResponseDto
     {
-        public string OrderNumber { get; set; }
+        public bool CanInjectOrders { get; set; }
     }
 }

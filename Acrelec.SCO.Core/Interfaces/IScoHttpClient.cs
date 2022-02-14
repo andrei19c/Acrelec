@@ -8,7 +8,7 @@ namespace Acrelec.SCO.Core.Interfaces
 {
     public interface IScoHttpClient
     {
-        Task<bool> IsAvailable();
+        Task<CheckAvailabilityResponse> IsAvailable();
         Task<InjectOrderResponse> AddOrder(InjectOrderRequest order);
     }
 }

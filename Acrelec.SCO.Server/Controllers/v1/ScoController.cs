@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Acrelec.SCO.Server.Dtos;
 using Acrelec.SCO.Server.Model;
 using Acrelec.SCO.Server.Validation;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +18,10 @@ namespace Acrelec.SCO.Server.Controllers.v1
         [Route("api-sco/v1/availability")]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(new CheckAvailabilityResponseDto
+            {
+                CanInjectOrders = true
+            });
         }
 
         [HttpPost]
